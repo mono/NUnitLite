@@ -113,13 +113,19 @@ namespace NUnitLite.Runner
 #if MONODROID_TOOLS
                 if (!string.IsNullOrEmpty (commandLineOptions.Android)) {
                     runner = new Xamarin.AndroidTestAssemblyRunner(commandLineOptions.Android);
+                } else if (!string.IsNullOrEmpty (commandLineOptions.Remote) && commandLineOptions.Remote.StartsWith ("android:")) {
+                    Xamarin.AndroidRemoteRunner.Add = commandLineOptions.Remote.SubString (8);
                 } else
 #elif MONOTOUCH_TOOLS
                 if (!string.IsNullOrEmpty (commandLineOptions.iOS)) {
                     throw new NotImplementedException ();
+                } else if (!string.IsNullOrEmpty (commandLineOptions.Remote) && commandLineOptions.Remote.StartsWith ("ios:")) {
+                    throw new NotImplementedException ();
                 } else
 #elif WASM_TOOLS
                 if (!string.IsNullOrEmpty (commandLineOptions.WebAssembly)) {
+                    throw new NotImplementedException ();
+                } else if (!string.IsNullOrEmpty (commandLineOptions.Remote) && commandLineOptions.Remote.StartsWith ("wasm:")) {
                     throw new NotImplementedException ();
                 } else
 #endif
